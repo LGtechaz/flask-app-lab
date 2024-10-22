@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+
+{% block title %}Резюме{% endblock %}
+
+{%block content%}
+<link rel="stylesheet" href="{{url_for('static', filename='styles/lol.css')}}">
+<section>
+    <h2>Про себе</h2>
+    <h3>Вацлавий Андрій 19 y.o</h3>
+    <p>Студент ПНУ, це мій перший Flask проект</p>
+</section>
+<section>
+    <h2>Освіта</h2>
+    <ul>
+        <li>Закінчена базова середня освіта</li>
+        <li>Закінчена повна середня освіта</li>
+        <li>Бакалавр. ПНУ ім. В. Стефаника спеціальність "Інженерія програмного забезпечення"</li>
+    </ul>
+</section>
+<section>
+    <h2>Навички</h2>
+    <ul>
+        <li>UI/UX(Figma, Adobe Photoshop)</li>
+        <li>HTML + CSS верстка</li>
+        <li>JS</li>
+        <li>Spring</li>
+        <li>SQL</li>
+    </ul>
+</section>
+<section>
+    <h2>Досвід роботи</h2>
+    <p>Наразі в мене немає досвіду в комерційній розробці та розробці власних проектів, оскільки я не ще не опанував всі потрібні навички</p>
+    <img src="{{ url_for('static', filename='images/kitten.jpg') }}" alt="image not found">
+</section>
+{%endblock%}

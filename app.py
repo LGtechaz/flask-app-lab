@@ -14,7 +14,7 @@ def home():
 
     return render_template("home.html", agent=agent)
 
-@app.route("/hi/<string:name>")   #/hi/ivan?age=45&q=fdfdf
+@app.route("/hi/<string:name>")   
 def greetings(name):
     name = name.upper()
     age = request.args.get("age", 0, int)   
@@ -24,7 +24,7 @@ def greetings(name):
 
 @app.route("/admin")
 def admin():
-    to_url = url_for("greetings", name="administrator", age=45, _external=True)     # "http://localhost:8080/hi/administrator?age=45"
+    to_url = url_for("greetings", name="administrator", age=45, _external=True)     
     print(to_url)
     return redirect(to_url)
 
@@ -44,6 +44,14 @@ def detail_post(id):
         abort(404) 
     post = posts[id-1]
     return render_template("detail_post.html", post=post)
+
+@app.route('/resume')
+def resume():
+    return render_template("resume.html")
+
+@app.route('/base')
+def base():
+    return render_template("base.html")
 
 if __name__ == "__main__":
     app.run()  # Launch built-in web server and run this Flask webapp, debug=True
