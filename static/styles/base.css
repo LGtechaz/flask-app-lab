@@ -38,3 +38,7 @@ img {
 section {
     background-color: rgb(238, 233, 233);
 }
+
+ul {
+    list-style-type: none;
+}
