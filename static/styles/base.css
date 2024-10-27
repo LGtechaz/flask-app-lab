@@ -3,6 +3,9 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -12,43 +15,26 @@ header {
     text-align: center;
 }
 
-nav {
-    background-color: #333;
-}
-
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-}
-
-nav ul li {
-    float: left;
-}
-
-nav ul li a {
-    display: block;
-    color: white;
-    padding: 14px 20px;
-    text-align: center;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    background-color: #111;
-}
-
 main {
     padding: 20px;
+    flex: 1; /* Це дозволяє основному контенту займати весь простір між header і footer */
+    display: flex;
+    flex-direction: column;
 }
 
 footer {
-    background-color: #333;
+    background-color: #343434;
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+section {
+    background-color: rgb(238, 233, 233);
 }

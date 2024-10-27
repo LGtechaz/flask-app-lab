@@ -1,0 +1,9 @@
+.grid-item {
+    background-color: #e9ecef;
+    padding: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+.centered-grid {
+    min-height: 100vh;
+  }

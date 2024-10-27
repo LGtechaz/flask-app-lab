@@ -3,38 +3,51 @@
 {% block title %}Резюме{% endblock %}
 
 {%block content%}
-<link rel="stylesheet" href="{{url_for('static', filename='styles/lol.css')}}">
-<section>
-    <h2 id="about_me">Про себе</h2>
-    <h3>Вацлавий Андрій 19 y.o</h3>
-    <p>Студент ПНУ, це мій перший Flask проект</p>
-</section>
-<section>
-    <h2 id="education">Освіта</h2>
-    <ul>
-        <li>Закінчена базова середня освіта</li>
-        <li>Закінчена повна середня освіта</li>
-        <li>Бакалавр. ПНУ ім. В. Стефаника спеціальність "Інженерія програмного забезпечення"</li>
-    </ul>
-</section>
-<section>
-    <h2 id="skills">Навички</h2>
-    <ul>
-        <li>UI/UX(Figma, Adobe Photoshop)</li>
-        <li>HTML + CSS верстка</li>
-        <li>Bootstrap</li>
-        <li>JS</li>
-        <li>Spring</li>
-        <li>SQL</li>
-    </ul>
-</section>
-<section>
-    <h2 id="experience">Досвід роботи</h2>
-    <p>Наразі в мене немає досвіду в комерційній розробці та розробці власних проектів, оскільки я не ще не опанував всі потрібні навички</p>
-</section>
-<section>
-    <h2 id="image">Зображення</h2>
-    <img src="{{ url_for('static', filename='images/kitten.jpg') }}" alt="image not found">
-</section>
+<link rel="stylesheet" href="{{url_for('static', filename='styles/content.css')}}">
+  <div class="container d-flex justify-content-center align-items-center centered-grid">
+    <div class="d-flex flex-column gap-5">
+      <div class="grid-item">
+        <section>
+            <h2 id="about_me">Про себе</h2>
+            <h3>Вацлавий Андрій 19 y.o</h3>
+            <p>Студент ПНУ, це мій перший Flask проект</p>
+        </section> 
+      </div>
+      <div class="grid-item">
+        <section>
+            <h2 id="education">Освіта</h2>
+            <ul>
+                <li>Закінчена базова середня освіта</li>
+                <li>Закінчена повна середня освіта</li>
+                <li>Бакалавр. ПНУ ім. В. Стефаника спеціальність "Інженерія програмного забезпечення"</li>
+            </ul>
+        </section>
+      </div>
+      <div class="grid-item">
+        <section>
+            <h2 id="skills">Навички</h2>
+            <ul>
+                <li>UI/UX(Figma, Adobe Photoshop)</li>
+                <li>HTML + CSS верстка</li>
+                <li>Bootstrap</li>
+                <li>JS</li>
+                <li>Spring</li>
+                <li>SQL</li>
+            </ul>
+        </section>
+      </div>
+      <div class="grid-item">
+        <section>
+            <h2 id="experience">Досвід роботи</h2>
+            <p>Наразі в мене немає досвіду в комерційній розробці та розробці власних проектів, оскільки я не ще не опанував всі потрібні навички</p>
+        </section>
+      </div>
+      <div class="grid-item">
+    <section>
+        <h2 id="image">Зображення</h2>
+        <img src="{{ url_for('static', filename='images/kitten.jpg') }}" alt="image not found">
+    </section></div>
+    </div>
+  </div>
 {%include 'sidebar.html'%}
 {%endblock%}
