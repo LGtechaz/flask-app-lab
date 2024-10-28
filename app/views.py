@@ -1,5 +1,8 @@
 from flask import request, redirect, url_for, render_template, abort
 from . import app
+from app.routes import users_bp
+
+app.register_blueprint(users_bp)
 
 @app.route('/')
 def main():
@@ -29,7 +32,7 @@ def admin():
     return redirect(to_url)
 
 @app.route("/andrii")
-def admin():
-    to_url = url_for("greetings", name="administrator", age=19, _external=True)     # "http://localhost:8080/hi/administrator?age=45"
+def andrii():
+    to_url = url_for("greetings", name="andrii", age=19, _external=True)     # "http://localhost:8080/hi/andrii?age=19"
     print(to_url)
     return redirect(to_url)
