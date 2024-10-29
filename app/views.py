@@ -1,6 +1,6 @@
 from flask import request, redirect, url_for, render_template, abort
 from . import app
-from app.routes import users_bp
+from app.users.routes import users_bp
 
 app.register_blueprint(users_bp)
 
