@@ -25,6 +25,14 @@ def greetings(name):
     return render_template("hi.html", 
                            name=name, age=age)
 
+@app.route('/resume')
+def resume():
+    return render_template("resume.html")
+
+@app.route('/base')
+def base():
+    return render_template("base.html")
+
 @app.route("/admin")
 def admin():
     to_url = url_for("greetings", name="administrator", age=45, _external=True)     # "http://localhost:8080/hi/administrator?age=45"
