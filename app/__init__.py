@@ -2,7 +2,7 @@ from flask import Flask
 
 # Ініціалізація додатку
 app = Flask(__name__)
-app.config.from_pyfile("../config.py")
+app.config.from_pyfile('../config.py')
 
 # Імпорт views
 from . import views

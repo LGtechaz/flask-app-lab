@@ -12,15 +12,30 @@ def login():
         password = request.form.get("password")
         
         if username == VALID_USERNAME and password == VALID_PASSWORD:
+      
             session["username"] = username
-            flash("Success: session added successfully.", "success")
+            session.permanent = True  # Сесія буде активною тривалий час
+            flash("Success: You are now logged in!", "success")
             return redirect(url_for("user_name.profile"))
         else:
-            flash("Incorrect data! Please try again.", "danger")
+
+            flash("Error: Incorrect username or password!", "danger")
             return redirect(url_for("user_name.login"))
             
     return render_template("login.html")
 
 @bp.route('/profile')
 def profile():
-    return render_template("profile.html")
+    if "username" not in session:
+        flash("You must log in first.", "danger")
+        return redirect(url_for("user_name.login"))
+
+    return render_template("profile.html", username=session["username"])
+
+@bp.route('/logout')
+def logout():
+    # Видалення інформації про користувача із сесії
+    session.pop("username", None)
+    session.pop("is_authenticated", None)  # Опціонально, якщо зберігаєте статус
+    flash("You have been logged out.", "success")
+    return redirect(url_for("user_name.login"))
