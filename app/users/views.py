@@ -24,59 +24,66 @@ def login():
             
     return render_template("login.html")
 
-#@bp.route('/profile')
-#def profile():
-  #  if "username" not in session:
-       # //flash("You must log in first.", "danger")
-       # //return redirect(url_for("user_name.login"))
-#
- #   //return render_template("profile.html", username=session["username"])
-
 @bp.route('/logout')
 def logout():
-    # Видалення інформації про користувача із сесії
     session.pop("username", None)
-    session.pop("is_authenticated", None)  # Опціонально, якщо зберігаєте статус
+    session.pop("is_authenticated", None) 
     flash("You have been logged out.", "success")
     return redirect(url_for("user_name.login"))
 
 @bp.route('/profile', methods=['GET', 'POST'])
 def profile():
-    # Перевірка автентифікації
     if "username" not in session:
         flash("You must log in first.", "danger")
         return redirect(url_for("user_name.login"))
 
-    response = make_response(render_template(
-        "profile.html", 
-        username=session["username"], 
-        cookies=request.cookies  # Передача cookies у шаблон
-    ))
+    theme = request.cookies.get("theme", "light") 
 
-    # Обробка додавання кукі
-    if request.method == "POST" and "add_cookie" in request.form:
-        key = request.form.get("cookie_key")
-        value = request.form.get("cookie_value")
-        max_age = request.form.get("cookie_max_age", type=int)  # Час у секундах
-        if key and value:
-            response.set_cookie(key, value, max_age=max_age)
-            flash(f"Cookie '{key}' added successfully!", "success")
-        else:
-            flash("Key and value are required to add a cookie.", "danger")
+    if request.method == "POST":
+        action = request.form.get("action")
 
-    # Обробка видалення кукі за ключем
-    elif request.method == "POST" and "delete_cookie" in request.form:
-        key = request.form.get("cookie_key")
-        if key in request.cookies:
-            response.delete_cookie(key)
-            flash(f"Cookie '{key}' deleted successfully!", "success")
-        else:
-            flash(f"Cookie '{key}' does not exist.", "danger")
+        if action == "add_cookie":
+            key = request.form.get("cookie_key")
+            value = request.form.get("cookie_value")
+            max_age = request.form.get("cookie_max_age", type=int) 
+            if key and value:
+                response = make_response(redirect(url_for("user_name.profile")))
+                response.set_cookie(key, value, max_age=max_age)
+                flash(f"Cookie '{key}' added successfully!", "success")
+                return response
+            else:
+                flash("Key and value are required to add a cookie.", "danger")
+                return redirect(url_for("user_name.profile"))
 
-    # Обробка видалення всіх кукі
-    elif request.method == "POST" and "delete_all_cookies" in request.form:
-        for cookie_key in request.cookies.keys():
-            response.delete_cookie(cookie_key)
-        flash("All cookies deleted successfully!", "success")
+        elif action == "delete_cookie":
+            key = request.form.get("cookie_key")
+            if key in request.cookies:
+                response = make_response(redirect(url_for("user_name.profile")))
+                response.delete_cookie(key)
+                flash(f"Cookie '{key}' deleted successfully!", "success")
+                return response
+            else:
+                flash(f"Cookie '{key}' does not exist.", "danger")
+                return redirect(url_for("user_name.profile"))
 
+        elif action == "delete_all_cookies":
+            response = make_response(redirect(url_for("user_name.profile")))
+            for cookie_key in request.cookies.keys():
+                response.delete_cookie(cookie_key)
+            flash("All cookies deleted successfully!", "success")
+            return response
+
+    return render_template("profile.html", username=session["username"], cookies=request.cookies, theme=theme)
+
+
+@bp.route('/set_theme/<theme>', methods=['GET'])
+def set_theme(theme):
+    if theme not in ["light", "dark"]:
+        flash("Invalid theme selected.", "danger")
+        return redirect(url_for("user_name.profile"))
+
+    response = make_response(redirect(url_for("user_name.profile")))
+    response.set_cookie("theme", theme, max_age=30 * 24 * 60 * 60)  # Зберігаємо на 30 днів
+    flash(f"Theme changed to {theme}.", "success")
     return response
+

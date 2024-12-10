@@ -3,45 +3,73 @@
 {% block title %}Greeting Page{% endblock %}
 
 {% block content %}
+<style>
+    body.light {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    body.dark {
+        background-color: #333333;
+        color: #ffffff;
+    }
+    .theme-buttons {
+        margin-bottom: 20px;
+    }
+</style>
 
-<h1>Hi, {{ username }}</h1>
+<body class="{{ theme }}">
+    <h1>Hi, {{ username }}</h1>
 
-<a href="{{url_for('user_name.logout')}}">logout</a>
+    <a href="{{ url_for('user_name.logout') }}">Logout</a>
 
-<h3>Додати cookie:</h3>
+    <div class="theme-buttons">
+        <h3>Change Theme:</h3>
+        <a href="{{ url_for('user_name.set_theme', theme='light') }}" class="btn btn-light">Light Theme</a>
+        <a href="{{ url_for('user_name.set_theme', theme='dark') }}" class="btn btn-dark">Dark Theme</a>
+    </div>
+
+    <h3>Додати cookie:</h3>
     <form action="{{ url_for('user_name.profile') }}" method="post">
+        <input type="hidden" name="action" value="add_cookie">
         <label>Ключ cookie:</label>
         <input type="text" name="cookie_key" required> <br>
         <label>Значення cookie:</label>
         <input type="text" name="cookie_value" required> <br>
         <label>Термін дії (у секундах):</label>
-        <input type="number" name="cookie_duration" required> <br>
+        <input type="number" name="cookie_max_age" required> <br>
         <button type="submit">Додати cookie</button> <br>
     </form>
 
     <h3>Видалити cookie за ключем:</h3>
     <form action="{{ url_for('user_name.profile') }}" method="post">
+        <input type="hidden" name="action" value="delete_cookie">
         <label>Ключ cookie для видалення:</label>
-        <input type="text" name="delete_cookie_key" required>
+        <input type="text" name="cookie_key" required>
         <button type="submit">Видалити cookie</button> <br>
     </form>
 
     <form action="{{ url_for('user_name.profile') }}" method="post">
+        <input type="hidden" name="action" value="delete_all_cookies">
         <button type="submit">Видалити всі cookie</button>
     </form>
 
-    <h3>Список всіх cookie:</h3>
-    <table>
-        <tr>
-            <th>Ключ</th>
-            <th>Значення</th>
-        </tr>
-        {% for key, value in cookies.items() %}
-        <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
-        </tr>
-        {% endfor %}
+    <h2>Список всіх активних кукі:</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ключ</th>
+                <th>Значення</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in cookies.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+</body>
 
 {% endblock %}
