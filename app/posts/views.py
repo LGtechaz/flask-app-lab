@@ -11,6 +11,7 @@ posts = [
 
 @post_bp.route('/') 
 def get_posts():
+    posts = load_posts()
     return render_template("posts.html", posts=posts)
 
 @post_bp.route('/<int:id>') 
