@@ -34,5 +34,14 @@
         "publication_date": "2024-12-14",
         "author": "user",
         "id": 4
+    },
+    {
+        "title": "\u0430\u0444\u0456\u0432",
+        "content": "\u0438\u0442\u0440 \u044c\u043e\u043b\u0431\u043c\u0438\u043f\u0430\u0456\u0432",
+        "category": "tech",
+        "is_active": false,
+        "publication_date": "2024-12-11",
+        "author": "user",
+        "id": 5
     }
 ]

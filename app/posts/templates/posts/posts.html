@@ -3,7 +3,7 @@
 {% block title %} POSTS {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('posts.static', filename='css/posts.css') }}">
+<link rel="stylesheet" href="{{ url_for('posts.static', filename='styles/posts.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
-                    <img src="{{ url_for('posts.static', filename='img/kitten.jpg') }}" id="image">
+                    <img src="{{ url_for('posts.static', filename='img/kitten.jpg') }}" alt="Kitten Image">
                     <p class="card-text">{{ post.content | truncate(23) }}</p>
                     <p><strong>Category:</strong> {{ post.category }}</p>
                     <p><strong>Published on:</strong> {{ post.publication_date }}</p>   
