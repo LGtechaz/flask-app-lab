@@ -44,3 +44,7 @@ def andrii():
     to_url = url_for("greetings", name="andrii", age=19, _external=True)     # "http://localhost:8080/hi/andrii?age=19"
     print(to_url)
     return redirect(to_url)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
