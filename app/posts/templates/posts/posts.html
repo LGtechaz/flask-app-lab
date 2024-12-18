@@ -24,9 +24,9 @@
                     <img src="{{ url_for('posts.static', filename='img/kitten.jpg') }}" alt="Kitten Image">
                     <p class="card-text">{{ post.content | truncate(23) }}</p>
                     <p><strong>Category:</strong> {{ post.category }}</p>
-                    <p><strong>Published on:</strong> {{ post.publication_date }}</p>   
+                    <p><strong>Published on:</strong> {{ post.posted }}</p>
                     <p><strong>Author:</strong> {{ post.author }}</p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+                    <a href="{{ url_for('posts.detail_post', post_id=post.id) }}">Read More</a>
                 </div>
             </div>
         </div>

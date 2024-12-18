@@ -43,5 +43,23 @@
         "publication_date": "2024-12-11",
         "author": "user",
         "id": 5
+    },
+    {
+        "title": "421341",
+        "content": "vdfvsdf",
+        "category": "tech",
+        "is_active": false,
+        "publication_date": "2024-12-18T03:26:00",
+        "author": "user",
+        "id": 6
+    },
+    {
+        "title": "nbt",
+        "content": " tnnbrs",
+        "category": "science",
+        "is_active": false,
+        "publication_date": "2024-12-18T03:31:00",
+        "author": "user",
+        "id": 7
     }
 ]
