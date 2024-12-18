@@ -40,3 +40,14 @@ def add_post():
         flash('Post added successfully!', 'success')
         return redirect(url_for('posts.get_posts'))  
     return render_template('add_post.html', form=form)
+
+@post_bp.route('/delete_post/<int:post_id>', methods=['POST'])
+def delete_post(post_id):
+ 
+    post = Post.query.get_or_404(post_id)
+    
+    db.session.delete(post)
+    db.session.commit()
+    
+    flash('Post deleted successfully!', 'success')
+    return redirect(url_for('posts.get_posts')) 
